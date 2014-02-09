@@ -3,7 +3,7 @@ defmodule EnvConf.Mixfile do
 
   def project do
     [ app: :env_conf,
-      version: "0.0.1",
+      version: "0.1.0",
       elixir: "~> 0.12.3",
       deps: deps(Mix.env) ]
   end
@@ -24,6 +24,8 @@ defmodule EnvConf.Mixfile do
     ]
   end
   defp deps(_env) do
-    []
+    [
+      {:ex_doc, github: "elixir-lang/ex_doc"}
+    ]
   end
 end
