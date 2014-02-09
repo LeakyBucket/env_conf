@@ -50,24 +50,4 @@ defmodule EnvConf.ServerTest do
       System.get_env("CALL_DICT_2") |> equals "true"
     end
   end
-
-  describe "handle_info" do
-    it "updates the env when given {:set, key, value}" do
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
-      
-      send(pid, {:set, "INFO_SET", "true"})
-
-      :gen_server.call(pid, {:get, "INFO_SET"}) |> equals "true"
-    end
-
-    it "updates the env when given {:set, dict}" do
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
-      dict = HashDict.new [{"INFO_DICT_1", "true"}, {"INFO_DICT_2", "true"}]
-      
-      send(pid, {:set, dict})
-
-      :gen_server.call(pid, {:get, "INDO_DICT_2"}) |> equals "true"
-      :gen_server.call(pid, {:get, "INFO_DICT_1"}) |> equals "true"
-    end
-  end
 end
