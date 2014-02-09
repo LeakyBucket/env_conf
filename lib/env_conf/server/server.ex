@@ -1,6 +1,23 @@
 defmodule EnvConf.Server do
   use GenServer.Behaviour
 
+  def start_link(defaults) do
+    :gen_server.start_link({:local, :env_conf}, __MODULE__, defaults, [])
+  end
+
+  def get(key) do
+    :gen_server.call :env_conf, {:get, key}
+  end
+
+  def set(key, value) do
+    :gen_server.call :env_conf, {:set, key, value}
+  end
+
+  def set(dict) do
+    :gen_server.call :env_conf, {:set, dict}
+  end
+  
+
   def init(defaults) do
     { set_if_missing(defaults), nil }
   end

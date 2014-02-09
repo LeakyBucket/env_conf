@@ -57,7 +57,7 @@ defmodule EnvConf.ServerTest do
       
       send(pid, {:set, "INFO_SET", "true"})
 
-      System.get_env("INFO_SET") |> equals "true"
+      :gen_server.call(pid, {:get, "INFO_SET"}) |> equals "true"
     end
 
     it "updates the env when given {:set, dict}" do
@@ -66,8 +66,8 @@ defmodule EnvConf.ServerTest do
       
       send(pid, {:set, dict})
 
-      System.get_env("INFO_DICT_1") |> equals "true"
-      System.get_env("INDO_DICT_2") |> equals "true"
+      :gen_server.call(pid, {:get, "INDO_DICT_2"}) |> equals "true"
+      :gen_server.call(pid, {:get, "INFO_DICT_1"}) |> equals "true"
     end
   end
 end

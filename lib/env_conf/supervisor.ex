@@ -1,14 +1,13 @@
 defmodule EnvConf.Supervisor do
   use Supervisor.Behaviour
 
-  def start_link do
-    :supervisor.start_link(__MODULE__, [])
+  def start_link(defaults) do
+    :supervisor.start_link(__MODULE__, defaults)
   end
 
-  def init([]) do
+  def init(defaults) do
     children = [
-      # Define workers and child supervisors to be supervised
-      # worker(EnvConf.Worker, [])
+      worker(EnvConf.Server, [defaults])
     ]
 
     # See http://elixir-lang.org/docs/stable/Supervisor.Behaviour.html
