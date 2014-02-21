@@ -19,7 +19,7 @@ defmodule EnvConf.ServerTest do
     end
 
     it "starts without defaults" do
-      {result, pid} = :gen_server.start_link(EnvConf.Server, [], [])
+      {result, _pid} = :gen_server.start_link(EnvConf.Server, [], [])
 
       result |> equals :ok
     end
