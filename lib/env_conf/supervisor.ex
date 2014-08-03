@@ -1,5 +1,5 @@
 defmodule EnvConf.Supervisor do
-  use Supervisor.Behaviour
+  use Supervisor
 
   def start_link(defaults \\ []) do
     :supervisor.start_link(__MODULE__, defaults)

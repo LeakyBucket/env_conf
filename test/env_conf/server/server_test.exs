@@ -1,96 +1,103 @@
 defmodule EnvConf.ServerTest do
-  use Amrita.Sweet
+  use ExUnit.Case
 
-  describe "init" do
-    it "sets default values if given" do
-      dict = HashDict.new [{"FIRST", "one"}, {"SECOND", "two"}]
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, dict, [])
+  test "sets default values if given" do
+    dict = HashDict.new |> HashDict.put("FIRST", "one") |> HashDict.put("SECOND", "two")
+    {:ok, pid} = :gen_server.start_link(EnvConf.Server, dict, [])
 
-      :gen_server.call(pid, {:get, "FIRST"}) |> equals "one"
-      :gen_server.call(pid, {:get, "SECOND"}) |> equals "two"
-    end
+    first = :gen_server.call(pid, {:get, "FIRST"})
+    second = :gen_server.call(pid, {:get, "SECOND"})
 
-    it "doesn't set default values also present in ENV" do
-      :ok = System.put_env("BACON", "good")
-      dict = HashDict.new [{"BACON", "bad"}]
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, dict, [])
-
-      :gen_server.call(pid, {:get, "BACON"}) |> !equals "bad"
-    end
-
-    it "starts without defaults" do
-      {result, _pid} = :gen_server.start_link(EnvConf.Server, [], [])
-
-      result |> equals :ok
-    end
+    assert first == "one"
+    assert second == "two"
   end
 
-  describe "handle_call" do
-    it "returns a value when given {:get, key}" do
-      System.put_env("CALL_GET", "true")
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
+  test "doesn't set default values also present in ENV" do
+    :ok = System.put_env("BACON", "good")
+    dict = HashDict.new |> HashDict.put("BACON", "bad")
+    {:ok, pid} = :gen_server.start_link(EnvConf.Server, dict, [])
+    bacon = :gen_server.call(pid, {:get, "BACON"})
 
-      :gen_server.call(pid, {:get, "CALL_GET"}) |> equals "true"
-    end
-
-    it "sets a value when given {:set, key, value}" do
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
-      :gen_server.call(pid, {:set, "CALL_SET_PAIR", "true"})
-
-      System.get_env("CALL_SET_PAIR") |> equals "true"
-    end
-
-    it "sets multiple values when given {:set, dict}" do
-      {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
-      dict = HashDict.new [{"CALL_DICT_1", "true"}, {"CALL_DICT_2", "true"}]
-
-      :gen_server.call(pid, {:set, dict})
-
-      System.get_env("CALL_DICT_1") |> equals "true"
-      System.get_env("CALL_DICT_2") |> equals "true"
-    end
+    assert bacon != "bad"
   end
 
-  describe "get" do
-    it "returns the value of the requested key" do
-      System.put_env("GET", "true")
-      EnvConf.Server.start_link
+  test "starts without defaults" do
+    {result, _pid} = :gen_server.start_link(EnvConf.Server, [], [])
 
-      EnvConf.Server.get("GET") |> equals "true"
-    end
+    assert result == :ok
   end
 
-  describe "get_number" do
-    it "returns the vale as a number" do
-      System.put_env("GET_NUMBER", "100")
-      EnvConf.Server.start_link
+  test "returns a value when given {:get, key}" do
+    System.put_env("CALL_GET", "true")
+    {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
+    get = :gen_server.call(pid, {:get, "CALL_GET"})
 
-      EnvConf.Server.get_number("GET_NUMBER") |> equals 100
-    end
+    assert get == "true"
   end
 
-  describe "get_atom" do
-    it "returns the value as an atom" do
-      System.put_env("GET_ATOM", "ant")
-      EnvConf.Server.start_link
+  test "sets a value when given {:set, key, value}" do
+    {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
+    :gen_server.call(pid, {:set, "CALL_SET_PAIR", "true"})
 
-      EnvConf.Server.get_atom("GET_ATOM") |> equals :ant
-    end
+    set_pair = System.get_env("CALL_SET_PAIR")
+
+    assert set_pair == "true"
   end
 
-  describe "get_boolean" do
-    it "returns a value of 'true' as true" do
-      System.put_env("GET_BOOLEAN_TRUE", "true")
-      EnvConf.Server.start_link
+  test "sets multiple values when given {:set, dict}" do
+    {:ok, pid} = :gen_server.start_link(EnvConf.Server, [], [])
+    dict = HashDict.new |> HashDict.put("CALL_DICT_1", "true") |> HashDict.put("CALL_DICT_2", "true")
 
-      EnvConf.Server.get_boolean("GET_BOOLEAN_TRUE") |> equals true
-    end
+    :gen_server.call(pid, {:set, dict})
+    dict_1 = System.get_env("CALL_DICT_1")
+    dict_2 = System.get_env("CALL_DICT_2")
 
-    it "returns a value of 'false' as false" do
-      System.put_env("GET_BOOLEAN_FALSE", "false")
-      EnvConf.Server.start_link
+    assert dict_1 == "true"
+    assert dict_2 == "true"
+  end
 
-      EnvConf.Server.get_boolean("GET_BOOLEAN_FALSE") |> equals false
-    end
+  test "returns the value of the requested key" do
+    System.put_env("GET", "true")
+    EnvConf.Server.start_link
+
+    get = EnvConf.Server.get("GET")
+
+    assert get == "true"
+  end
+
+  test "returns the vale as a number" do
+    System.put_env("GET_NUMBER", "100")
+    EnvConf.Server.start_link
+
+    env_number = EnvConf.Server.get_number("GET_NUMBER")
+
+    assert env_number == 100
+  end
+
+  test "returns the value as an atom" do
+    System.put_env("GET_ATOM", "ant")
+    EnvConf.Server.start_link
+
+    env_atom = EnvConf.Server.get_atom("GET_ATOM")
+
+    assert env_atom == :ant
+  end
+
+  test "returns a value of 'true' as true" do
+    System.put_env("GET_BOOLEAN_TRUE", "true")
+    EnvConf.Server.start_link
+
+    env_boolean = EnvConf.Server.get_boolean("GET_BOOLEAN_TRUE")
+
+    assert env_boolean == true
+  end
+
+  test "returns a value of 'false' as false" do
+    System.put_env("GET_BOOLEAN_FALSE", "false")
+    EnvConf.Server.start_link
+
+    env_boolean = EnvConf.Server.get_boolean("GET_BOOLEAN_FALSE")
+
+    assert env_boolean == false
   end
 end

@@ -4,7 +4,7 @@ defmodule EnvConf.Mixfile do
   def project do
     [ app: :env_conf,
       version: "0.1.0",
-      elixir: "~> 0.12.3",
+      elixir: "~> 0.14.3",
       deps: deps(Mix.env) ]
   end
 
@@ -18,11 +18,6 @@ defmodule EnvConf.Mixfile do
   #
   # To specify particular versions, regardless of the tag, do:
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
-  defp deps(env) when env == :test do
-    [
-      { :amrita, github: "josephwilk/amrita" }
-    ]
-  end
   defp deps(_env) do
     [
       {:ex_doc, github: "elixir-lang/ex_doc"}

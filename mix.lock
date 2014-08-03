@@ -1,3 +1,2 @@
-[ "amrita": {:git, "git://github.com/josephwilk/amrita.git", "8e59157c0fb6791a4d76a14793e3a361b654f7a7", []},
-  "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "e6386d3f81a9d46bbd9b6f3e4f7c5f1273f465f1", []},
-  "meck": {:git, "git://github.com/eproxus/meck.git", "62265e4a89297b3415502351a35082933225d1af", [branch: "develop"]} ]
+%{"ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "b59a08729ad0ee805aabc4f2b4f2d97261a57825", []},
+  "meck": {:git, "git://github.com/eproxus/meck.git", "3fa3e9bbebc3e65f6ceffe4800d56335e9e3ebac", [branch: "master"]}}

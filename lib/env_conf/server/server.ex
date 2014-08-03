@@ -1,11 +1,11 @@
 defmodule EnvConf.Server do
   @moduledoc """
-    The EnvConf Server is the main config service.  It provides a few functions for getting and setting Config Values.  
+    The EnvConf Server is the main config service.  It provides a few functions for getting and setting Config Values.
 
-    The current behavior for setting values requires that both the key and value be binaries.  However there are get functions that will return a value of a specific type.  
+    The current behavior for setting values requires that both the key and value be binaries.  However there are get functions that will return a value of a specific type.
   """
 
-  use GenServer.Behaviour
+  use GenServer
 
   def start_link(defaults \\ []) do
     :gen_server.start_link({:local, :env_conf}, __MODULE__, defaults, [])
@@ -19,21 +19,17 @@ defmodule EnvConf.Server do
   end
 
   @doc """
-    get_number takes a binary key value.  It returns the result of calling Kernel.binary_to_integer on the binary stored in the system environment at that key.
+    get_number takes a binary key value.  It returns the result of calling String.to_integer on the binary stored in the system environment at that key.
   """
   def get_number(key) do
-    val = get(key)
-
-    binary_to_integer(val)
+    key |> get |> String.to_integer
   end
 
   @doc """
-    get_atom takes a binary key value.  It returns the result of calling Kernel.binary_to_atom on the binary stored in the system environment at the given key.
+    get_atom takes a binary key value.  It returns the result of calling String.to_atom on the binary stored in the system environment at the given key.
   """
   def get_atom(key) do
-    val = get(key)
-
-    binary_to_atom(val)
+    key |> get |> String.to_atom
   end
 
   @doc """
@@ -47,7 +43,7 @@ defmodule EnvConf.Server do
       "TRUE" -> true
     end
   end
-  
+
   @doc """
     Set the environment variable specified by key to the binary version of value.
   """
@@ -61,12 +57,12 @@ defmodule EnvConf.Server do
   def set(dict) do
     :gen_server.call :env_conf, {:set, dict}
   end
-  
+
 
   def init(defaults) do
     { set_if_missing(defaults), nil }
   end
-  
+
   def handle_call({:get, key}, _from, state) do
     { :reply, System.get_env(key), state }
   end
