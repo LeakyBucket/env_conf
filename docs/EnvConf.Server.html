@@ -20,16 +20,29 @@
     </script>
 
     <div id="content">
+      <div class="breadcrumbs">env_conf v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="EnvConf.html">EnvConf</a> &rarr; <a href="EnvConf.Server.html">Server</a></div>
+
       <h1>
         EnvConf.Server
         
       </h1>
 
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
       
         <div id="moduledoc" class="docstring">
-          <p>The EnvConf Server is the main config service.  It provides a few functions for getting and setting Config Values.  </p>
-
-<p>The current behavior for setting values requires that both the key and value be binaries.  However there are get functions that will return a value of a specific type.  </p>
+          <p>  The EnvConf Server is the main config service.  It provides a few functions for getting and setting Config Values.</p>
+<p>  The current behavior for setting values requires that both the key and value be binaries.  However there are get functions that will return a value of a specific type.</p>
 
         </div>
       
@@ -37,49 +50,47 @@
       
 
       
-
-      
-        <h2 id="functions_summary">Functions summary</h2>
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
   <td class="summary_signature"><a href="#get/1">get(key)</a></td>
   
-    <td class="summary_synopsis"><p>get takes a binary key value.  It returns the binary stored in the system environment at that key.</p>
+    <td class="summary_synopsis"><p>get takes a binary key value.  It returns the binary stored in the system environment at that key</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#get_atom/1">get_atom(key)</a></td>
   
-    <td class="summary_synopsis"><p>get<em>atom takes a binary key value.  It returns the result of calling Kernel.binary</em>to_atom on the binary stored in the system environment at the given key.</p>
+    <td class="summary_synopsis"><p>get_atom takes a binary key value.  It returns the result of calling String.to_atom on the binary stored in the system environment at the given key</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#get_boolean/1">get_boolean(key)</a></td>
   
-    <td class="summary_synopsis"><p>get_boolean takes a binary key value.  If the value of that environment key is &quot;false&quot; or &quot;FALSE&quot; then it returns false.  If the value of that environment key is &quot;true&quot; or &quot;TRUE&quot; then it returns true.</p>
+    <td class="summary_synopsis"><p>get_boolean takes a binary key value.  If the value of that environment key is “false” or “FALSE” then it returns false.  If the value of that environment key is “true” or “TRUE” then it returns true</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#get_number/1">get_number(key)</a></td>
   
-    <td class="summary_synopsis"><p>get<em>number takes a binary key value.  It returns the result of calling Kernel.binary</em>to_integer on the binary stored in the system environment at that key.</p>
+    <td class="summary_synopsis"><p>get_number takes a binary key value.  It returns the result of calling String.to_integer on the binary stored in the system environment at that key</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#set/1">set(dict)</a></td>
   
-    <td class="summary_synopsis"><p>Translate the given HashDict to the system environment.  Keys map to environment variables and values map to values.</p>
+    <td class="summary_synopsis"><p>Translate the given HashDict to the system environment.  Keys map to environment variables and values map to values</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#set/2">set(key, value)</a></td>
   
-    <td class="summary_synopsis"><p>Set the environment variable specified by key to the binary version of value.</p>
+    <td class="summary_synopsis"><p>Set the environment variable specified by key to the binary version of value</p>
 </td>
   
 </tr>
@@ -94,70 +105,101 @@
       
 
       
-
-      
-
-      
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="get/1">
-    <strong>get(key)</strong>
-  </p>
+  <div class="detail_header" id="get/1">
+    <span class="signature"><strong>get(key)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#get/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>get takes a binary key value.  It returns the binary stored in the system environment at that key.</p>
+  <div class="docstring"><p>  get takes a binary key value.  It returns the binary stored in the system environment at that key.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="get_atom/1">
-    <strong>get_atom(key)</strong>
-  </p>
+  <div class="detail_header" id="get_atom/1">
+    <span class="signature"><strong>get_atom(key)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#get_atom/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>get<em>atom takes a binary key value.  It returns the result of calling Kernel.binary</em>to_atom on the binary stored in the system environment at the given key.</p>
+  <div class="docstring"><p>  get_atom takes a binary key value.  It returns the result of calling String.to_atom on the binary stored in the system environment at the given key.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="get_boolean/1">
-    <strong>get_boolean(key)</strong>
-  </p>
+  <div class="detail_header" id="get_boolean/1">
+    <span class="signature"><strong>get_boolean(key)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#get_boolean/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>get_boolean takes a binary key value.  If the value of that environment key is &quot;false&quot; or &quot;FALSE&quot; then it returns false.  If the value of that environment key is &quot;true&quot; or &quot;TRUE&quot; then it returns true.</p>
+  <div class="docstring"><p>  get_boolean takes a binary key value.  If the value of that environment key is “false” or “FALSE” then it returns false.  If the value of that environment key is “true” or “TRUE” then it returns true.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="get_number/1">
-    <strong>get_number(key)</strong>
-  </p>
+  <div class="detail_header" id="get_number/1">
+    <span class="signature"><strong>get_number(key)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#get_number/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>get<em>number takes a binary key value.  It returns the result of calling Kernel.binary</em>to_integer on the binary stored in the system environment at that key.</p>
+  <div class="docstring"><p>  get_number takes a binary key value.  It returns the result of calling String.to_integer on the binary stored in the system environment at that key.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="set/1">
-    <strong>set(dict)</strong>
-  </p>
+  <div class="detail_header" id="set/1">
+    <span class="signature"><strong>set(dict)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#set/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Translate the given HashDict to the system environment.  Keys map to environment variables and values map to values.</p>
+  <div class="docstring"><p>  Translate the given HashDict to the system environment.  Keys map to environment variables and values map to values.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="set/2">
-    <strong>set(key, value)</strong>
-  </p>
+  <div class="detail_header" id="set/2">
+    <span class="signature"><strong>set(key, value)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#set/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Set the environment variable specified by key to the binary version of value.</p>
+  <div class="docstring"><p>  Set the environment variable specified by key to the binary version of value.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="start_link/1">
-    <strong>start_link(defaults \\ [])</strong>
-  </p>
+  <div class="detail_header" id="start_link/1">
+    <span class="signature"><strong>start_link(defaults \\ [])</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#start_link/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
   <div class="docstring"></div>
   

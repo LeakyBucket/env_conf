@@ -1,2 +1,2 @@
-%{"ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "b59a08729ad0ee805aabc4f2b4f2d97261a57825", []},
-  "meck": {:git, "git://github.com/eproxus/meck.git", "3fa3e9bbebc3e65f6ceffe4800d56335e9e3ebac", [branch: "master"]}}
+%{"earmark": {:package, "0.1.8"},
+  "ex_doc": {:package, "0.5.1"}}
