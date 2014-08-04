@@ -3,7 +3,7 @@ defmodule EnvConf.Mixfile do
 
   def project do
     [app: :env_conf,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 0.15.0",
       description: description,
       package: package,
