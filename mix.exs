@@ -3,8 +3,8 @@ defmodule EnvConf.Mixfile do
 
   def project do
     [app: :env_conf,
-      version: "0.2.0",
-      elixir: "~> 0.15.0",
+      version: "0.3.0",
+      elixir: "~> 1.0.0",
       description: description,
       package: package,
       deps: deps(Mix.env)]
@@ -35,7 +35,7 @@ defmodule EnvConf.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps(_env) do
     [
-      {:ex_doc, "~> 0.5.0"},
+      {:ex_doc, only: :dev},
       {:earmark, "~> 0.1.8"}
     ]
   end
